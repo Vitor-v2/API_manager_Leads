@@ -1,7 +1,7 @@
 import { Handler } from "express"
 import {prisma} from '../database/db'
 import { httpError } from "../Error/HTTPerrors"
-import { createGroupSchema, updateGroupSchema } from "../validation/validation"
+import { createGroupSchema, updateGroupSchema } from "../validation/Groupvalidation"
 
 export class controllerGroup {
     

@@ -3,11 +3,13 @@ import { controllerLead } from './controller/controller'
 import { controllerGroup } from './controller/controllerGroup'
 import { controllerCampaign } from './controller/campaign'
 import {controllerCampaignLeads } from './controller/campaignLead'
+import controllerGroupLead from './controller/controllerGroupLead'
 
     const leadController = new controllerLead()
     const groupController = new controllerGroup()
     const campaignController = new controllerCampaign()
     const campaignLeadsController = new controllerCampaignLeads()
+    const controllerGroupLead = new controllerGroupLead()
 
     const router = Router()
 
@@ -33,6 +35,11 @@ router.get("/campaigns/:campaignId/leads", campaignLeadsController.getLeads)
 router.post("/campaigns/:campaignId/leads", campaignLeadsController.addLeads)
 router.put("/campaigns/:campaignId/leads/:leadId", campaignLeadsController.updateStatus)
 router.delete("/campaigns/:campaignId/leads/:leadId", campaignLeadsController.deleteLead)
+
+router.get("/groups/:groupId/leads", controllerGroupLead.getGroup)
+router.post("/groups/:groupId/leads", controllerGroupLead.addGroup)
+router.delete("/groups/:groupId/leads/:leadId", controllerGroupLead.deleteGroup)
+
 
 router.get('/status', (req,res,next)=>{
     try {

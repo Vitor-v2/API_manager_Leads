@@ -1,7 +1,7 @@
 import { prisma } from "../database/db"
 import { Handler } from "express"
 import { httpError } from "../Error/HTTPerrors"
-import { schemaAddCampaignLead, schemaFindManyCampaignLead } from "../validation/validation"
+import { schemaAddCampaignLead, schemaFindManyCampaignLead } from "../validation/CampaignLeadvalidation"
 import { Prisma } from "@prisma/client"
 
 export class controllerCampaignLeads {
