@@ -1,12 +1,15 @@
 import z from "zod";
 
-export const createGroupSchema = z.object({
-  name: z.string(),
-  description: z.string() 
+export const updateGroupLeadSchema = z.object({
+  id: z.number(),
+})
+
+export const deleteGroupLeadSchema = z.object({
+  id: z.number(),
 })
 
 const schemaStatus = z.enum([
-    "New",
+  "New",
   "Contacted",
   "Qualified",
   "Converted",
