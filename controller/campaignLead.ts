@@ -12,7 +12,7 @@ export class controllerCampaignLeads {
             const validation = schemaFindManyCampaignLead.parse(req.body)
             const {page = '1', pageSize = '2', sortBy = 'New', name, order = 'asc',status} = validation
             
-                const where: Prisma.LeadWhereInput = {
+                const where: Prisma.LeadWhereInput = {   
                     Campaign:{
                         some:{campaignId}
                     }
