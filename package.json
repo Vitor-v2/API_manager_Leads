@@ -1,7 +1,9 @@
 {
- "scripts": {
+  "type": "module",
+  "scripts": {
   "build": "tsc",
-  "server": "npx tsx watch ./src/server.ts"
+  "server": "npx tsx watch ./src/server.ts",
+  "seed": "npx tsx ./database/seed.ts"
  },
  
   "dependencies": {

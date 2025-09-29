@@ -1,51 +1,39 @@
-import { prisma } from "./database/db"
+import { PrismaClient } from "@prisma/client"
 
-
-const campaign =  [
+const prisma = new PrismaClient()
+const campaignData =  [
   {
-    "id": 4,
-    "name": "Campanha de Inverno 2025",
-    "description": "Promoção de inverno focada em produtos de estação.",
-    "startDate": "2025-06-21T00:00:00Z",
-    "endDate": "2025-09-22T23:59:59Z"
+    "name": "Campanha 2025",
+    "description": "Promoção de inverno focada em produtos de estação."
   },
   {
-    "id": 5,
-    "name": "Retomada de Clientes Inativos",
-    "description": "Estratégia para reengajar clientes que não interagem há mais de 6 meses.",
-    "startDate": "2025-07-01T00:00:00Z",
-    "endDate": null
+    "name": "Clientes Inativos",
+    "description": "Estratégia para reengajar."
   },
   {
-    "id": 6,
-    "name": "Campanha de Aniversário da Empresa",
-    "description": "Ofertas e comemorações de aniversário da empresa para a base de clientes.",
-    "startDate": "2025-10-05T00:00:00Z",
-    "endDate": "2025-10-15T23:59:59Z"
+    "name": "Campanha da Empresa",
+    "description": "Ofertas e comemorações de clientes."
   }
 ]
 
-const group = [
+
+const groupData = [
   {
-    "id": 1,
     "name": "Leads Qualificados",
     "description": "Leads que demonstraram interesse e foram pré-qualificados."
   },
   {
-    "id": 2,
     "name": "Novos Inscritos",
     "description": "Leads recém-adquiridos através do site."
   },
   {
-    "id": 3,
     "name": "Clientes Recorrentes",
     "description": "Leads que já fizeram uma compra no passado."
   }
 ]
 
-const lead = [
+const leadData = [
   {
-    "id": 1,
     "name": "Maria Silva",
     "email": "maria.silva@exemplo.com",
     "phone": 987654321,
@@ -53,7 +41,6 @@ const lead = [
     "groups": [1, 2]
   },
   {
-    "id": 2,
     "name": "João Pereira",
     "email": "joao.pereira@exemplo.com",
     "phone": 912345678,
@@ -61,7 +48,6 @@ const lead = [
     "groups": [1]
   },
   {
-    "id": 3,
     "name": "Ana Souza",
     "email": "ana.souza@exemplo.com",
     "phone": 998765432,
@@ -69,7 +55,6 @@ const lead = [
     "groups": [3]
   },
   {
-    "id": 4,
     "name": "Carlos Lima",
     "email": "carlos.lima@exemplo.com",
     "phone": 923456789,
@@ -77,7 +62,6 @@ const lead = [
     "groups": []
   },
   {
-    "id": 5,
     "name": "Fernanda Costa",
     "email": "fernanda.costa@exemplo.com",
     "phone": 934567890,
@@ -86,7 +70,7 @@ const lead = [
   }
 ]
 
-const campaignLead = [
+const campaignLeadData= [
   {
     "campaignId": 1,
     "leadId": 1,
@@ -114,14 +98,38 @@ const campaignLead = [
   }
 ]
 
+
 async function main () {
     try {
-        console.log("Limpando dados das Tabelas")
+        console.log("🧹🧹Limpando dados das Tabela Campaign")
         await prisma.campaign.deleteMany()
+        
+        campaignData.map(async (data)=>{
+          await prisma.campaign.createMany({
+            data: {
+              name: data.name,
+              description: data.description
+            }
+          })
+        })
+        console.log("👍Dados inseridos")
+        console.log("🧹🧹Limpando dados das Tabela Group")
+        
+        await prisma.group.deleteMany()
+        campaignData.map(async (data)=>{
+          await prisma.group.createMany({
+            data: {
+              name: data.name,
+              description: data.description
+            }
+          })
+        })
+
         await prisma.campaignLead.deleteMany()
-        await prisma.campaignLead.deleteMany()
-        await prisma.campaignLead.deleteMany()
-    } catch (error) {
+        await prisma.lead.deleteMany()
+      } catch (error) {
         console.log(`Erro:${error}`)
+      }
     }
-}
+
+main()

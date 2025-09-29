@@ -4,6 +4,7 @@ import { httpError } from "../Error/HTTPerrors"
 import { Prisma } from "@prisma/client"
 import { deleteGroupLeadSchema, getGroupLeadSchema, updateGroupLeadSchema } from "../validation/GroupLeadvalidation"
 
+
 export class controllerLeadinGroup {
     getLeadinGroup: Handler  = async (req, res, next) =>{
         try {
@@ -88,6 +89,7 @@ export class controllerLeadinGroup {
         try {
             const param = +req.params.id
             const query = deleteGroupLeadSchema.parse(req.body)
+
             
             const result = await prisma.group.update({
                 where:{

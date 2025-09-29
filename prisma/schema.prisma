@@ -24,8 +24,8 @@ model Campaign {
 
 model Lead {
   id        Int            @id @default(autoincrement())
-  name      String         @db.VarChar(30)
-  email     String         @db.VarChar(30)
+  name      String         @db.VarChar(60)
+  email     String         @db.VarChar(60)
   phone     Int
   status    StateStatus    @default(New)
   createdAt DateTime       @default(now())
@@ -46,7 +46,7 @@ model CampaignLead {
 
 model Group {
   id          Int    @id @default(autoincrement())
-  name        String @db.VarChar(30)
+  name        String @db.VarChar(60)
   description String
   leads       Lead[] @relation("LeadGroup")
 }
