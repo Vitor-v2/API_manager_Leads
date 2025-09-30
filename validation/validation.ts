@@ -1,6 +1,6 @@
 import {z} from "zod"
 
-const schemaStatus = z.enum([
+export const schemaStatus = z.enum([
     "New",
   "Contacted",
   "Qualified",

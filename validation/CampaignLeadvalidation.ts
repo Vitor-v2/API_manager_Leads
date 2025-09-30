@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-const statusCampaignLead = z.enum(
+ const statusCampaignLead = z.enum(
   [
   "New",
   "Contacted",
@@ -46,7 +46,7 @@ export const schemaAddCampaignLead = z.object({
 
 export const schemaUpdateCampaignLead = z.object({
   status: z.enum([
-"New",
+  "New",
   "Engaged",
   "FollowUp_Scheduled",
   "Contacted",
