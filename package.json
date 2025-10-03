@@ -3,7 +3,8 @@
   "scripts": {
   "build": "tsc",
   "server": "npx tsx watch ./src/server.ts",
-  "seed": "npx tsx ./database/seed.ts"
+  "seed": "npx tsx ./database/seed.ts",
+  "deleteSeed": "npx tsx ./database/deleteData.ts"
  },
  
   "dependencies": {

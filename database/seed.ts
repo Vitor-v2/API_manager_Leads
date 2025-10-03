@@ -94,75 +94,51 @@ const campaignLeadData = [
   },
 ];
 
-async function seedCampaignData() {
-  console.log("🧹🧹Limpando dados das Tabela Campaign");
-  await prisma.campaign.deleteMany();
-
-  campaignData.map(async (data) => {
-    await prisma.campaign.createMany({
-      data: {
-        name: data.name,
-        description: data.description,
-      },
-    });
-  });
-  console.log("✅Dados da tabela inseridos ✅");
-}
-
-async function seedGroupData() {
-  console.log("🧹🧹Limpando dados das Tabela Group");
-  await prisma.group.deleteMany();
-  groupData.map(async (data) => {
-    await prisma.group.createMany({
-      data: {
-        name: data.name,
-        description: data.description,
-      },
-    });
-  });
-  console.log("✅Dados da tabela Group inseridos ✅");
-}
-
-async function seedCampaignLead() {
-  await prisma.campaignLead.deleteMany();
-  
-  campaignLeadData.map(async (campaignData) => {
-    const validationCampaignLead = schemaAddCampaignLead.parse(campaignData);
-    
-    await prisma.campaignLead.createMany({
-      data: {
-        campaignId: +campaignData.campaignId,
-        ...validationCampaignLead,
-      },
-    });
-  });
-  console.log("✅Dados da tabela CampaignLead inseridos ✅");
-}
-
-async function seedLead() {
-  console.log("🧹Limpando dados da tabela Lead🧹");
-  await prisma.lead.deleteMany();
-  
-  leadData.map(async (datas) =>{
-    const seedValidationLead = schemaCreateLead.parse(datas)
-    await prisma.lead.createMany({
-      data:{
-        ...seedValidationLead
-      }
-    })
-  })
-  console.log("✅Dados da tabela Lead inseridos ✅");
-}
-
-async function main() {
+async function seedData() {
   try {
-    seedCampaignData()
-    seedCampaignLead()
-    seedGroupData()
-    seedLead()
-  } catch (error) {
-    console.log(`Erro:${error}`);
-  }
+    
+//     campaignData.map(async (data) => {
+//       await prisma.campaign.createMany({
+//         data: {
+//           name: data.name,
+//           description: data.description,
+//         },
+//       });
+//   });
+//   console.log("✅Dados da tabela inseridos ✅");
+
+// groupData.map(async (data) => {
+//   await prisma.group.createMany({
+//     data: {
+//       name: data.name,
+//       description: data.description,
+//     },
+//   });
+// });
+
+
+campaignLeadData.map(async (campaignData) => {
+  const validationCampaignLead = schemaAddCampaignLead.parse(campaignData);
+  
+  await prisma.campaignLead.createMany({
+    data: {
+      campaignId: +campaignData.campaignId,
+      ...validationCampaignLead,
+    },
+  });
+});
+
+// leadData.map(async (datas) =>{
+//   const seedValidationLead = schemaCreateLead.parse(datas)
+//   await prisma.lead.createMany({
+//     data:{
+//       ...seedValidationLead
+//     }
+//   })
+// })
+} catch (error) {
+ console.log(error) 
+}
 }
 
-main();
+seedData()
