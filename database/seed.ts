@@ -122,6 +122,7 @@ async function seedData() {
       const seedValidationLead = schemaCreateLead.parse(data);
       await prisma.lead.create({
         data: {
+          id: data.id,
           ...seedValidationLead,
         },
       });
@@ -138,28 +139,21 @@ async function seedData() {
       });
     }
     console.log("✅Dados da tabela group inseridos ✅");
-  } catch (error) {
-    console.log(error);
-  }
-}
 
-async function CampaignLeads() {
-  try {
     for (const data of campaignLeadData) {
       const query = schemaAddCampaignLead.parse(data);
-      const result = await prisma.campaignLead.create({
+      await prisma.campaignLead.create({
         data: {
-          campaignId: data.campaignId,
+          campaignId: +data.campaignId,
           leadId: query.leadId,
           status: query.status,
         },
       });
-      console.log(`✅Dados da tabela campaignLead inseridos: ${result} ✅`);
     }
+    console.log(`✅Dados da tabela campaignLead inseridos ✅`);
   } catch (error) {
     console.log(error);
   }
 }
 
 seedData();
-CampaignLeads();

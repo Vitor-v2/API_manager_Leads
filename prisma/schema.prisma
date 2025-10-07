@@ -39,7 +39,7 @@ model CampaignLead {
   leadId     Int
   status     LeadCampaignStatus @default(New)
   lead       Lead               @relation(fields: [leadId], references: [id])
-  campaing   Campaign           @relation(fields: [campaignId], references: [id])
+  campaign   Campaign           @relation(fields: [campaignId], references: [id])
 
   @@id([leadId, campaignId])
 }
